@@ -2,6 +2,47 @@ body {
     margin: 0;
     font-family: 'segoe ui', sans-serif;
 }
+
+.sidebar {
+    width: 220px;
+    min-height: 100vh;
+    background-color: #2f5d9f;
+    color: white;
+    padding: 35px 22px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px 24px 24px 0px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 55px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.close-menu {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+}
 aside {
     width: 220px;
     min-height: 100vh;
@@ -31,21 +72,28 @@ nav ul {
     gap: 8px;
 }
 
-nav a {
+nav a, .logout-btn {
     display:block;
     padding: 15px 18px;
+    width: 100%;
+    box-sizing: border-box;
+    background: none;
+    border: none;
+    font-family: 'segoe ui', sans-serif;
 
     color: white;
     text-decoration: none;
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 0.1px;
+    text-align: left;
+    cursor: pointer;
 
     border-radius: 12px;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-nav a:hover {
+nav a:hover, .logout-btn:hover {
     background-color: #f5f3ee;
     color: #172a4d;
 }
@@ -54,3 +102,92 @@ nav a.active {
     background-color: #f5f3ee;
     color: #172a4d;
 }
+
+.account-nav {
+    margin-top: auto;
+}
+
+.mobile-header {
+    display: none;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+@media (max-width: 768px) {
+   
+    .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 76px;
+        background-color: #2f5d9f;
+        box-sizing: border-box;
+    }
+
+    .mobile-logo {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: white;
+    }
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background-color: transparent;
+        color: white;
+
+        font-size: 28px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .sidebar {
+        width: 280px;
+        height: 100vh;
+        min-height: 100vh;
+        padding: 25px 22px;
+        border-radius: 0px 24px 24px 0px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-header {
+        margin-bottom: 45px;
+    }
+
+    .close-menu {
+        display: block;
+    }
+
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .sidebar {
+        z-index: 1000;
+    }
+
+}
+
