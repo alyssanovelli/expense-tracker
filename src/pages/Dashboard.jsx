@@ -1,3 +1,10 @@
-export default function Dashboard() {
-    return <h1>Dashboard</h1>;
+function Dashboard() {
+    return (
+        <div>
+            <div className="dashboard-header">
+                <h1>Dashboard</h1>
+                <p>Welcome, {user.name}!</p>
+            </div>
+        </div>
+    );
 }
