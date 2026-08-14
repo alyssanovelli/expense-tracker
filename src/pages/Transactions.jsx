@@ -1,6 +1,7 @@
 import Sidebar from "../components/sidebar";
 import { useState } from "react";
 import "./Transactions.css"
+import Footer from "../components/Footer"
 
 function Transactions() {
     const [name, setName] = useState("");
@@ -51,7 +52,9 @@ function Transactions() {
             setType("expense");
             setDate("");
             setNote("");
-            setShowForm(false);
+            
+            toggleForm();
+            
         } catch (error) {
             console.error("Error saving transaction:", error);
         }
@@ -116,6 +119,8 @@ function Transactions() {
             </div>
         )}
         </main>
+
+        <Footer />
         </div>
         
         

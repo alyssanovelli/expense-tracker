@@ -1,0 +1,19 @@
+.footer {
+    width: 100%;
+    box-sizing: border-box;
+
+    background-color: #2f5d9f;
+    color: white;
+
+    padding: 25px 45px;
+    margin-top: 60px;
+
+    text-align: center;
+
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
