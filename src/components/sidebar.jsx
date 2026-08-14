@@ -26,7 +26,7 @@ function Sidebar() {
         
         {isOpen && (
             <div
-                className="sidebar=overlay"
+                className="sidebar-overlay"
                 onClick={closeMenu}
             ></div>
         )}

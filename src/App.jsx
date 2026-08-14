@@ -1,9 +1,7 @@
+import { Outlet } from "react-router-dom";
 
-import Sidebar from "./components/sidebar";
 function App() {
-  return (
-    <Sidebar />
-  );
+    return <Outlet />;
 }
 
 export default App;

@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f3ee;
+    color: #172a4d;
+}
+.transactions-page {
+    min-height: 100vh;
+    background-color: #f5f3ee
+}
+
+.transactions-main {
+    margin-left: 220px;
+    padding: 45px;
+}
+
+.header-transactions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.header-transactions h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #172a4d;
+}
+.header-transactions p {
+    margin: 8px 0 0;
+    color: #5f6b7a;
+    font-size: 16px;
+}
+
+.new-transaction-btn {
+    width: fit-content !important;
+    min-width: 0;
+    max-width: max-content;
+    flex: 0 0 auto;
+
+    margin: 0 0 0 auto;
+    padding: 8px 14px;
+
+    background-color: #2f5d9f;
+    color: white;
+    border: none;
+    border-radius: 9px;
+
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 
+        background-color 0.2s ease
+        transform 0.15s ease;
+}
+
+.new-transaction-btn:active {
+    transform: scale(0.97);
+}
+
+.new-transaction-btn:hover {
+    background-color: #244b82;
+}
+
+.transaction-card {
+    background-color: white;
+    border-radius: 18px;
+    padding: 30px;
+    max-width: 700px;
+    box-sizing: border-box;
+
+    animation: formOpen 0.25s ease-out;
+}
+
+.transaction-card.closing {
+    animation: formClose 0.2s ease-in forwards;
+}
+
+@keyframes formOpen {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes formClose {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.transaction-card h2 {
+    margin-top: 0;
+    color: #172a4d;
+    margin-bottom: 25px;
+    font-size: 22px;
+}
+
+.transaction-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaction-card label {
+    color: #172a4d;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.transaction-card input,
+.transaction-card select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    border: 1px solid #d8dce3;
+    border-radius: 10px;
+    background-color: #f5f3ee;
+    color: #172a4d;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;
+    outline: none;
+}
+
+.transaction-card input:focus,
+.transaction-card select:focus {
+    border-color: #2f5d9f;
+}
+
+.transaction-card button[type="submit"] {
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background-color: #2f5d9f;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.transaction-card button[type="submit"]:hover {
+    background-color: #244b82;
+}
+
+@media (max-width: 768px) {
+    .transactions-main {
+        margin-left: 0;
+        padding: 25px 20px;
+    }
+
+    .transactions-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .new-transaction-btn {
+        width: 100%;
+    }
+
+    .transaction-card {
+        width: 100%;
+        padding: 24px;
+    }
+}
