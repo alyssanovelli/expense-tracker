@@ -160,6 +160,62 @@ body {
     background-color: #244b82;
 }
 
+.transaction-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.transaction-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.transaction-info strong {
+    font-size: 16px;
+}
+
+.transaction-info span {
+    font-size: 15px;
+    color: #7a8491;
+}
+
+.transaction-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.transaction-actions button {
+    border: none;
+    background: transparent;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.edit-btn {
+    color: #2f5d9f;
+}
+
+.edit-btn:hover {
+    background-color: #eef3fa;
+}
+
+.delete-btn {
+    color: #2f5d9f;
+}
+
+.delete-btn:hover {
+    background-color: #fbeeee;
+}
+
 @media (max-width: 768px) {
     .transactions-main {
         margin-left: 0;

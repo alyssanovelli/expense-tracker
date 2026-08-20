@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import HomeNavBar from "../components/HomeNavBar"
 import Footer from "../components/Footer.jsx";
@@ -6,6 +7,7 @@ import Footer from "../components/Footer.jsx";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,6 +32,8 @@ function Login() {
 
         console.log("Logged in:", data);
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/dashboard");
     };
     return (
         <div className="login-page">

@@ -13,8 +13,8 @@ function HomeNavBar() {
       </div>
 
         <ul>
-        <li><NavLink to="/Register" activeClassName="active">Register</NavLink></li>
-        <li><NavLink to="/Login" activeClassName="active">Login</NavLink></li>
+        <li><NavLink to="/register" activeClassName="active">Register</NavLink></li>
+        <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
         </ul>
     </nav>
   );

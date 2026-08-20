@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./sidebar.css";
 import { useState } from "react";
 
@@ -8,6 +8,14 @@ function Sidebar() {
     const closeMenu = () => {
         setIsOpen(false);
     };
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setIsOpen(false);
+        navigate("/");
+    }
 
     return (
        <>
@@ -56,7 +64,7 @@ function Sidebar() {
                 <nav className="account-nav">
                     <ul>
                         <li><NavLink to="/settings" onClick={closeMenu}>Settings</NavLink></li>
-                        <li><button className="logout-btn" onClick={closeMenu}>
+                        <li><button className="logout-btn" onClick={handleLogout}>
                             Logout
                         </button></li>
                     </ul>
