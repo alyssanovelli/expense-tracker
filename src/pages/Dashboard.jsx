@@ -2,6 +2,7 @@ import "./Dashboard.css";
 import Sidebar from "../components/sidebar";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
+import { apiFetch } from "../utils/apiFetch";
 
 function Dashboard() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -22,14 +23,10 @@ function Dashboard() {
             try {
                 const token = localStorage.getItem("token");
 
-                const response = await fetch(
+                const response = await apiFetch(
                     "http://localhost:5000/api/transactions",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
                 );
+                if (!response) return;
 
                 const data = await response.json();
 

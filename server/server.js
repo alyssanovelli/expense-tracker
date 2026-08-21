@@ -1,10 +1,14 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import pool from "./db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 
-const JWT_SECRET = "my-secret-key";
+
+const JWT_SECRET = process.env.JWT_SECRET;
 const app = express();
 
 app.use(cors({
@@ -162,7 +166,7 @@ app.post("/api/register", async (req, res) => {
         const token = jwt.sign(
             { userId: user.id },
             JWT_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: "2s" }
         );
 
         res.status(201).json({
@@ -196,7 +200,7 @@ app.post("/api/login", async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
-        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "2s" });
 
         res.json({
             message: "Login successful", 

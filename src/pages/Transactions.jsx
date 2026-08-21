@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./Transactions.css"
 import Footer from "../components/Footer"
 import { Pencil, Trash2 } from "lucide-react";
+import { apiFetch } from "../utils/apiFetch";
 
 function Transactions() {
     const [name, setName] = useState("");
@@ -28,19 +29,18 @@ function Transactions() {
 };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("FORM Submit");
 
         const transaction = {
             name, amount, type, date, note
         };
         try {
-            const response = await fetch("http://localhost:5000/api/transactions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                },
-                body: JSON.stringify(transaction)
-            });
+            const response = await apiFetch(
+                "http://localhost:5000/api/transactions",
+            );
+
+            if (!response) return;
+            
             const data = await response.json();
 
             if (!response.ok) {
@@ -90,6 +90,31 @@ function Transactions() {
 
     fetchTransactions();
     }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(
+               `http://localhost:5000/api/transactions/${id}`,
+               {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+               } 
+            );
+            const data = await response.json();
+            if (!response.ok) {
+                console.error(data);
+                return;
+            }
+            console.log("Transaction deleted:", data);
+            setTransactions((current) =>
+            current.filter((transaction) => transaction.id !== id)
+            );
+        } catch (error) {
+            console.error("Error deleting transaction:", error);
+        }
+    };
     return (
         <div className="transactions-page">
             <Sidebar />
@@ -196,6 +221,7 @@ function Transactions() {
                 className="delete-btn"
                 title="Delete transaction"
                 type="button"
+                onClick={() => handleDelete(transaction.id)}
             >
                 <Trash2 size={18} />
             </button>
