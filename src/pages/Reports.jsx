@@ -10,7 +10,7 @@ function Reports() {
         const fetchTransactions = async () => {
             try {
                 const response = await apiFetch(
-                    "http://localhost:5000/api/transactions"
+                    "/api/transactions"
                 );
 
                 if (!response) return;

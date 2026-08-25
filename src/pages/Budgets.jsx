@@ -15,9 +15,7 @@ function Budgets() {
     useEffect(() => {
         const fetchBudgets = async () => {
             try {
-                const response = await apiFetch(
-                    "http://localhost:5000/api/budgets"
-                );
+                const response = await apiFetch("/api/budgets");
 
                 if (!response) return;
 
@@ -36,9 +34,7 @@ function Budgets() {
 
         const fetchTransactions = async () => {
     try {
-        const response = await apiFetch(
-            "http://localhost:5000/api/transactions"
-        );
+        const response = await apiFetch("/api/transactions");
 
         if (!response) return;
 
@@ -62,8 +58,7 @@ fetchTransactions();
         e.preventDefault();
 
         try {
-            const response = await apiFetch(
-                "http://localhost:5000/api/budgets",
+            const response = await apiFetch("/api/budgets",
                 {
                     method: "POST",
                     headers: {
@@ -97,8 +92,7 @@ fetchTransactions();
     };
         const handleDelete = async (id) => {
         try {
-            const response = await apiFetch(
-                `http://localhost:5000/api/budgets/${id}`,
+            const response = await apiFetch(`/api/budgets/${id}`,
                 {
                     method: "DELETE",
                 }

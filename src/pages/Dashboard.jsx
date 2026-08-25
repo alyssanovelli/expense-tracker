@@ -23,8 +23,7 @@ function Dashboard() {
             try {
                 const token = localStorage.getItem("token");
 
-                const response = await apiFetch(
-                    "http://localhost:5000/api/transactions",
+                const response = await apiFetch("/api/transactions",
                 );
                 if (!response) return;
 

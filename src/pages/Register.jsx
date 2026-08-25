@@ -1,3 +1,4 @@
+import { apiFetch } from "../utils/apiFetch";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeNavBar from "../components/HomeNavBar";
@@ -14,7 +15,7 @@ function Register() {
     e.preventDefault();
 
     try {
-        const response = await fetch("http://localhost:5000/api/register", {
+        const response = await apiFetch("/api/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -37,8 +37,8 @@ function Transactions() {
         };
         try {
             const url = editingId
-                ? `http://localhost:5000/api/transactions/${editingId}`
-                : "http://localhost:5000/api/transactions";
+                ? `/api/transactions/${editingId}`
+                : "/api/transactions";
 
             const response = await apiFetch(url, {
                     method: editingId ? "PUT" : "POST",
@@ -84,7 +84,7 @@ function Transactions() {
     const fetchTransactions = async () => {
         try {
             const response = await apiFetch(
-                "http://localhost:5000/api/transactions",
+                "/api/transactions",
             );
             if (!response) return;
             const data = await response.json();
@@ -120,7 +120,7 @@ function Transactions() {
     const handleDelete = async (id) => {
         try {
             const response = await apiFetch(
-               `http://localhost:5000/api/transactions/${id}`,
+               `/api/transactions/${id}`,
                {
                 method: 'DELETE',
                } 
