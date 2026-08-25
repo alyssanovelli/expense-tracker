@@ -1,16 +1,105 @@
-# React + Vite
+# Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack expense tracking application that allows users to manage their income and expenses, create spending budgets, and view reports about their financial activity.
 
-Currently, two official plugins are available:
+The application was built to practice full-stack web development, REST API design, authentication, PostgreSQL database management, and production deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+[View the Live Demo](YOUR_LIVE_DEMO_URL)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The live application includes a demo login option so visitors can explore the application without creating their own account.
 
-## Expanding the ESLint configuration
+## GitHub Repository
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[View the Source Code]
+https://github.com/alyssanovelli/expense-tracker
+
+## Features
+
+### Authentication
+
+- User registration
+- User login
+- JWT-based authentication
+- Protected application routes
+- User-specific data
+- Automatic logout when an authentication token is invalid or expired
+
+### Transactions
+
+- Add income and expenses
+- View transaction history
+- Delete transactions
+- Store transaction names, amounts, dates, types, and notes
+- Separate income from expenses
+- Persistent transaction data using PostgreSQL
+
+### Budgets
+
+- Create spending budgets by category
+- Set a budget amount
+- Track spending against each budget
+- Display budget progress bars
+- Show remaining budget amounts
+- Indicate when spending exceeds a budget
+- Delete budgets
+
+### Reports
+
+- View spending information
+- Review financial activity
+- See summarized information about income and expenses
+
+### Settings
+
+- User settings page
+- Account-related interface
+- Application navigation and account controls
+
+## Tech Stack
+
+### Frontend
+
+- React
+- JavaScript
+- React Router
+- Vite
+- CSS
+- Lucide React
+
+### Backend
+
+- Node.js
+- Express
+- PostgreSQL
+- JSON Web Tokens
+- REST APIs
+
+### Database
+
+- PostgreSQL
+- pg / node-postgres
+- Relational database design
+- Foreign key relationships
+- Unique constraints
+
+### Deployment
+
+- Render
+- Render PostgreSQL
+
+## Application Architecture
+
+The application is divided into three primary parts:
+
+```text
+React Frontend
+      |
+      | HTTP Requests
+      v
+Express / Node.js API
+      |
+      | SQL Queries
+      v
+PostgreSQL Database
