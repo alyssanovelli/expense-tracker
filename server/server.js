@@ -146,7 +146,7 @@ app.delete("/api/transactions/:id", authenticateToken, async (req, res) => {
         });
     }
 });
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.get("/api/budgets", authenticateToken, async (req, res) => {
     try {
