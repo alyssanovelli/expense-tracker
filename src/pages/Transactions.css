@@ -6,12 +6,15 @@ body {
 }
 .transactions-page {
     min-height: 100vh;
-    background-color: #f5f3ee
+    background-color: #f5f3ee;
+    display: flex;
+    flex-direction: column;
 }
 
 .transactions-main {
     margin-left: 220px;
     padding: 45px;
+    flex: 1;
 }
 
 .header-transactions {

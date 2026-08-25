@@ -4,6 +4,7 @@ import "./Transactions.css"
 import Footer from "../components/Footer"
 import { Pencil, Trash2 } from "lucide-react";
 import { apiFetch } from "../utils/apiFetch";
+import { CgEditBlackPoint } from "react-icons/cg";
 
 function Transactions() {
     const [name, setName] = useState("");
@@ -14,6 +15,7 @@ function Transactions() {
     const [showForm, setShowForm] = useState(false);
     const [closingForm, setClosingForm] = useState(false);
     const [transactions, setTransactions] = useState([]);
+    const [editingId, setEditingId] = useState(null);
 
     const toggleForm = () => {
     if (showForm) {
@@ -29,15 +31,22 @@ function Transactions() {
 };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("FORM Submit");
 
         const transaction = {
             name, amount, type, date, note
         };
         try {
-            const response = await apiFetch(
-                "http://localhost:5000/api/transactions",
-            );
+            const url = editingId
+                ? `http://localhost:5000/api/transactions/${editingId}`
+                : "http://localhost:5000/api/transactions";
+
+            const response = await apiFetch(url, {
+                    method: editingId ? "PUT" : "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(transaction),
+                });
 
             if (!response) return;
             
@@ -47,15 +56,23 @@ function Transactions() {
                 console.error(data);
                 return;
             }
-            console.log("Transaction saved:", data);
-            setTransactions((current) => [data, ...current]);
+
+            if(editingId) {
+                setTransactions((current) =>
+                    current.map((transaction) =>
+                        transaction.id === editingId ? data : transaction
+                    )
+                );
+            } else {
+                setTransactions((current) => [data, ...current]);
+            }
 
             setName("");
             setAmount("");
             setType("expense");
             setDate("");
             setNote("");
-            
+            setEditingId(null);
             toggleForm();
             
         } catch (error) {
@@ -66,15 +83,10 @@ function Transactions() {
     useEffect(() => {
     const fetchTransactions = async () => {
         try {
-            const response = await fetch(
+            const response = await apiFetch(
                 "http://localhost:5000/api/transactions",
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }
             );
-
+            if (!response) return;
             const data = await response.json();
 
             if (!response.ok) {
@@ -91,17 +103,30 @@ function Transactions() {
     fetchTransactions();
     }, []);
 
+    const handleEdit = (transaction) => {
+    setEditingId(transaction.id);
+
+    setName(transaction.name);
+    setAmount(transaction.amount);
+    setType(transaction.type);
+
+    setDate(transaction.date.slice(0, 10));
+
+    setNote(transaction.note || "");
+
+    setShowForm(true);
+    };
+
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(
+            const response = await apiFetch(
                `http://localhost:5000/api/transactions/${id}`,
                {
                 method: 'DELETE',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
                } 
             );
+            if (!response) return;
+
             const data = await response.json();
             if (!response.ok) {
                 console.error(data);
@@ -171,7 +196,9 @@ function Transactions() {
                 onChange={(e) => setNote(e.target.value)}
             />
 
-            <button type="submit">Save Transaction</button>
+            <button type="submit">
+                {editingId ? "Update Transaction " : "Save Transaction"}
+            </button>
         </form>
     </div>
 )}
@@ -213,6 +240,7 @@ function Transactions() {
                 className="edit-btn"
                 title="Edit transaction"
                 type="button"
+                onClick={() => handleEdit(transaction)}
             >
                 <Pencil size={18} />
             </button>

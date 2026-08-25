@@ -148,6 +148,88 @@ app.delete("/api/transactions/:id", authenticateToken, async (req, res) => {
     }
 });
 const PORT = 5000;
+
+app.get("/api/budgets", authenticateToken, async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT *
+             FROM budgets
+             WHERE user_id = $1
+             ORDER BY id DESC`,
+             [req.user.userId]
+        );
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch budgets",
+        });
+    }
+});
+
+app.post("/api/budgets", authenticateToken, async (req, res) => {
+    try {
+        const { category, amount } = req.body;
+
+        const result = await pool.query(
+            `INSERT INTO budgets (user_id, category, amount)
+             VALUES ($1, $2, $3)
+             RETURNING *`,
+            [
+                req.user.userId,
+                category,
+                amount
+            ]
+        );
+
+        res.status(201).json(result.rows[0]);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to create budget",
+        });
+    }
+});
+
+
+app.delete("/api/budgets/:id", authenticateToken, async (req, res) => {
+    try {
+        const budgetId = req.params.id;
+
+        const result = await pool.query(
+            `DELETE FROM budgets
+             WHERE id = $1
+             AND user_id = $2
+             RETURNING *`,
+            [
+                budgetId,
+                req.user.userId
+            ]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message: "Budget not found",
+            });
+        }
+
+        res.json({
+            message: "Budget deleted successfully",
+            budget: result.rows[0],
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to delete budget",
+        });
+    }
+});
+
 app.post("/api/register", async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -166,7 +248,7 @@ app.post("/api/register", async (req, res) => {
         const token = jwt.sign(
             { userId: user.id },
             JWT_SECRET,
-            { expiresIn: "2s" }
+            { expiresIn: "30d" }
         );
 
         res.status(201).json({
@@ -200,7 +282,7 @@ app.post("/api/login", async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
-        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "2s" });
+        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "30d" });
 
         res.json({
             message: "Login successful", 

@@ -1,0 +1,256 @@
+.budgets-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f7f8fa;
+}
+
+.budgets-main {
+    margin-left: 240px;
+    padding: 40px;
+    flex: 1;
+}
+
+.budgets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.budgets-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+}
+
+.budgets-header p {
+    margin-top: 8px;
+    color: #666;
+    font-size: 16px;
+}
+
+.new-budget-btn {
+    border: none;
+    background: #222;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.new-budget-btn:hover {
+    background: #444;
+}
+
+.budget-form-card {
+    position: relative;
+    z-index: 10;
+
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 25px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.budget-form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+}
+
+.budget-form-card label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 5px;
+}
+
+.budget-form-card input {
+    position: relative;
+    z-index: 11;
+
+    pointer-events: auto;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+
+    font-size: 15px;
+    background: white;
+    color: #222;
+
+    outline: none;
+}
+
+.budget-form-card input:focus {
+    border-color: #222;
+}
+
+.budget-form-card button {
+    position: relative;
+    z-index: 11;
+
+    pointer-events: auto;
+
+    margin-top: 10px;
+    padding: 12px 18px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #222;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.budget-form-card button:hover {
+    background: #444;
+}
+
+.budgets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.budget-card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+
+    padding: 22px 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.budget-card h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    color: #222;
+}
+
+.budget-card p {
+    margin: 0;
+    color: #666;
+    font-size: 15px;
+}
+
+.delete-budget-btn {
+    border: none;
+    background: transparent;
+
+    color: #777;
+
+    padding: 8px;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
+}
+
+.delete-budget-btn:hover {
+    background: #f1f1f1;
+    color: #222;
+}
+
+.empty-message {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+
+    padding: 40px;
+    text-align: center;
+
+    color: #777;
+}
+
+.budget-info {
+    flex: 1;
+}
+
+.budget-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.budget-title h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #222;
+}
+
+.budget-title span {
+    font-size: 14px;
+    color: #666;
+}
+
+.budget-progress {
+    width: 100%;
+    height: 10px;
+    background: #e9e9e9;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.budget-progress-bar {
+    height: 100%;
+    background: #222;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.budget-remaining {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+
+    .budgets-main {
+        margin-left: 0;
+        padding: 25px 20px;
+    }
+
+    .budgets-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .new-budget-btn {
+        width: 100%;
+    }
+
+    .budget-card {
+        padding: 18px;
+    }
+}
