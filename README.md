@@ -103,6 +103,7 @@ Express / Node.js API
       | SQL Queries
       v
 PostgreSQL Database
+```
 ## Database Structure
 
 The application uses three primary tables.
@@ -110,17 +111,19 @@ The application uses three primary tables.
 ### Users
 
 Stores registered user accounts.
-
 ```text
 users
 ├── id
 ├── name
 ├── email
 └── password_hash
+```
+
 ## Transactions
 
 Stores user income and expense records.
 
+```text
 transactions
 ├── id
 ├── user_id
@@ -129,40 +132,48 @@ transactions
 ├── type
 ├── date
 └── note
+```
 ## Budgets
 
 Stores user-created spending budgets.
-
+```text
 budgets
 ├── id
 ├── user_id
 ├── category
 └── amount
-Authentication
+```
+## Authentication
 
 Authentication is handled using JSON Web Tokens.
 
 When a user successfully logs in, the backend returns a token to the frontend. The frontend stores the token and sends it with protected API requests.
 
 Protected requests use the following authorization format:
-
+```text
 Authorization: Bearer <token>
-
+```
 The backend verifies the token before allowing access to user-specific data.
 
-API
+## API
 Authentication
+```text
 POST /api/register
 POST /api/login
-Transactions
+```
+## Transactions
+```text
 GET    /api/transactions
 POST   /api/transactions
 DELETE /api/transactions/:id
-Budgets
+```
+## Budgets
+```text
 GET    /api/budgets
 POST   /api/budgets
 DELETE /api/budgets/:id
-Project Structure
+```
+## Project Structure
 expense-tracker/
 │
 ├── src/
@@ -193,44 +204,6 @@ expense-tracker/
 ├── package.json
 ├── vite.config.js
 └── README.md
-Running Locally
-Prerequisites
-Node.js
-npm
-PostgreSQL
-Clone the Repository
-git clone https://github.com/alyssanovelli/expense-tracker.git
-cd expense-tracker
-Install Dependencies
-npm install
-Environment Variables
-
-Create a .env file containing your local PostgreSQL configuration.
-
-Example:
-
-DB_USER=postgres
-DB_HOST=localhost
-DB_NAME=expense_tracker
-DB_PASSWORD=your_database_password
-DB_PORT=5432
-
-Do not commit .env files or database credentials to GitHub.
-
-Start the Backend
-cd server
-node server.js
-
-The backend runs on:
-
-http://localhost:5000
-Start the Frontend
-
-From the project root:
-
-npm run dev
-Deployment
-
 The application is deployed using Render.
 
 User
@@ -246,7 +219,7 @@ Render PostgreSQL
 
 Production environment variables are configured through Render and are not stored in the repository.
 
-Demo
+## Demo
 
 The deployed application includes a demo login option so recruiters and visitors can explore the application without creating their own account.
 
@@ -260,7 +233,8 @@ Add transactions.
 Create budgets.
 Review reports.
 Test the logout and login flow.
-Development Highlights
+
+## Development Highlights
 
 This project provided experience with:
 
@@ -276,9 +250,9 @@ Handling API errors
 Managing environment variables
 Deploying a full-stack application
 Debugging production database issues
-Future Improvements
+## Future Improvements
 
-Potential future improvements include:
+### Potential future improvements include:
 
 Password reset functionality
 More advanced financial reports
@@ -290,8 +264,6 @@ Improved mobile responsiveness
 Data visualization
 Exporting transactions
 Additional account settings
-Author
+## Author
 
 Alyssa Novelli
-
-GitHubDatabase S
