@@ -7,7 +7,7 @@ The application was built to practice full-stack web development, REST API desig
 
 ## Live Demo
 
-[View the Live Demo](https://expense-tracker-vktn.onrender.com)
+[View the Live Demo](https://expense-tracker-fe-z51v.onrender.com)
 
 The live application includes a demo login option so visitors can explore the application without creating their own account.
 
