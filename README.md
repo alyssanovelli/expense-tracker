@@ -207,7 +207,7 @@ expense-tracker/
 └── README.md
 ```
 The application is deployed using Render.
-
+```text
 User
  |
  v
@@ -218,6 +218,7 @@ Express / Node.js API
  |
  v
 Render PostgreSQL
+```
 
 Production environment variables are configured through Render and are not stored in the repository.
 
