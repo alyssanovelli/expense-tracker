@@ -11,7 +11,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: [
+            "http://localhost:5173"
+            "https://expense-tracker-fe-z51v.onrender.com"
+    ]
 }));
 
 app.use(express.json());
