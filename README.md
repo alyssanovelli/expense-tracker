@@ -240,7 +240,7 @@ Test the logout and login flow.
 ## Development Highlights
 
 This project provided experience with:
-
+```text
 Building React components
 Managing React state with hooks
 Creating protected routes
@@ -253,10 +253,11 @@ Handling API errors
 Managing environment variables
 Deploying a full-stack application
 Debugging production database issues
+```
 ## Future Improvements
 
 ### Potential future improvements include:
-
+```text
 Password reset functionality
 More advanced financial reports
 Recurring transactions
@@ -267,6 +268,7 @@ Improved mobile responsiveness
 Data visualization
 Exporting transactions
 Additional account settings
+```
 ## Author
 
 Alyssa Novelli
