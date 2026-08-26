@@ -174,6 +174,7 @@ POST   /api/budgets
 DELETE /api/budgets/:id
 ```
 ## Project Structure
+```text
 expense-tracker/
 │
 ├── src/
@@ -204,6 +205,7 @@ expense-tracker/
 ├── package.json
 ├── vite.config.js
 └── README.md
+```
 The application is deployed using Render.
 
 User
