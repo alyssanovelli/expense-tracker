@@ -103,20 +103,21 @@ Express / Node.js API
       | SQL Queries
       v
 PostgreSQL Database
-Database Structure
+## Database Structure
 
-The application uses three primary tables:
+The application uses three primary tables.
 
-Users
+### Users
 
 Stores registered user accounts.
 
+```text
 users
 ├── id
 ├── name
 ├── email
 └── password_hash
-Transactions
+## Transactions
 
 Stores user income and expense records.
 
@@ -128,7 +129,7 @@ transactions
 ├── type
 ├── date
 └── note
-Budgets
+## Budgets
 
 Stores user-created spending budgets.
 
@@ -293,4 +294,4 @@ Author
 
 Alyssa Novelli
 
-GitHub
+GitHubDatabase S
