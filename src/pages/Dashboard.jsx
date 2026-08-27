@@ -87,12 +87,22 @@ function Dashboard() {
                                     <div>
                                         <strong>{transaction.name}</strong>
                                         <span>
-                                            {new Date(transaction.date).toLocaleDateString("en-US", {
-                                                year: "numeric",
-                                                month: "short",
-                                                day: "numeric",
-                                            })}
-                                        </span>
+    {(() => {
+        const [year, month, day] = transaction.date
+            .slice(0, 10)
+            .split("-");
+
+        return new Date(
+            Number(year),
+            Number(month) - 1,
+            Number(day)
+        ).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+        });
+    })()}
+</span>
                                     </div>
                                     <p>
                                         ${Number(transaction.amount).toFixed(2)}
