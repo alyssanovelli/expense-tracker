@@ -18,7 +18,7 @@ function Home() {
                     and understand where your money goes.
                 </p>
 
-                <button onClick={() => navigate("/login")}>
+                <button onClick={() => navigate("/login?demo=true")}>
                     Try Demo
                 </button>
             </main>

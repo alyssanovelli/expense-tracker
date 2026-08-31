@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./Login.css";
 import HomeNavBar from "../components/HomeNavBar"
 import Footer from "../components/Footer.jsx";
@@ -9,37 +9,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-
-    const handleDemoLogin = async () => {
-    try {
-        const response = await apiFetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: "demo@expensetracker.com",
-                password: "Demo123!",
-            }),
-        });
-
-        if (!response) return;
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            console.error(data);
-            return;
-        }
-
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-
-        navigate("/dashboard");
-    } catch (error) {
-        console.error("Demo login error:", error);
-    }
-};
+    const [searchParams] = useSearchParams();
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,6 +44,13 @@ function Login() {
     } catch (error) {
         console.error("Login error:", error);
     }
+    useEffect(() => {
+
+        if (searchParams.get("demo") === "true") {
+            setEmail("demo@expensetracker.com");
+            setPassword("Demo123!")
+        }
+    }, [searchParams]);
 };
     return (
         <div className="login-page">
@@ -100,14 +77,6 @@ function Login() {
 
                         <button type="submit">
                             Log In
-                        </button>
-
-                        <button
-                        type="button"
-                        className="demo-login-btn"
-                        onClick={handleDemoLogin}
-                        >
-                        Try Demo Account
                         </button>
                 </form>
             </div>
