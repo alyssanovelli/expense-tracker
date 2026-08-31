@@ -10,6 +10,7 @@ function Transactions() {
     const [name, setName] = useState("");
     const [amount, setAmount] = useState("");
     const [type, setType] = useState("expense");
+    const [budget, setBudget] = useState("");
     const [date, setDate] = useState("");
     const [note, setNote] = useState("");  
     const [showForm, setShowForm] = useState(false);
@@ -33,7 +34,7 @@ function Transactions() {
         e.preventDefault();
 
         const transaction = {
-            name, amount, type, date, note
+            name, amount, type, budget, date, note
         };
         try {
             const url = editingId
@@ -70,6 +71,7 @@ function Transactions() {
             setName("");
             setAmount("");
             setType("expense");
+            setBudget("");
             setDate("");
             setNote("");
             setEditingId(null);
@@ -109,6 +111,7 @@ function Transactions() {
     setName(transaction.name);
     setAmount(transaction.amount);
     setType(transaction.type);
+    setBudget(transaction.budget || "");
 
     setDate(transaction.date.slice(0, 10));
 
@@ -181,6 +184,13 @@ function Transactions() {
                 <option value="expense">Expense</option>
                 <option value="income">Income</option>
             </select>
+
+            <label>Budget:</label>
+            <input
+                type="text"
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
+            />
 
             <label>Date:</label>
             <input

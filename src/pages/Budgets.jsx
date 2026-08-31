@@ -178,8 +178,8 @@ fetchTransactions();
         .filter(
             (transaction) =>
                 transaction.type === "expense" &&
-                transaction.name.toLowerCase() ===
-                    budget.category.toLowerCase()
+                transaction.budget?.trim().toLowerCase() ===
+                    budget.category.trim().toLowerCase()
         )
         .reduce(
             (total, transaction) =>

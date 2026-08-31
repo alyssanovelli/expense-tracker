@@ -61,11 +61,11 @@ app.get("/api/transactions", authenticateToken, async(req, res) => {
 
 app.post("/api/transactions", authenticateToken, async(req, res) => {
     try{
-        const { name, amount, type, date, note} = req.body;
+        const { name, amount, type, budget, date, note} = req.body;
 
         const result = await pool.query(
-            'INSERT INTO transactions (user_id, name, amount, type, date, note) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            [req.user.userId, name, amount, type, date, note]
+            'INSERT INTO transactions (user_id, name, amount, type, budget, date, note) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            [req.user.userId, name, amount, type, budget, date, note]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -77,7 +77,7 @@ app.post("/api/transactions", authenticateToken, async(req, res) => {
     });
     app.put("/api/transactions/:id", authenticateToken, async (req, res) => {
         try {
-             const { name, amount, type, date, note } = req.body;
+             const { name, amount, type, budget, date, note } = req.body;
         const transactionId = req.params.id;
 
         const result = await pool.query(
@@ -85,15 +85,17 @@ app.post("/api/transactions", authenticateToken, async(req, res) => {
              SET name = $1,
                  amount = $2,
                  type = $3,
-                 date = $4,
-                 note = $5
-             WHERE id = $6
-             AND user_id = $7
+                 budget = $4,
+                 date = $5,
+                 note = $6
+             WHERE id = $7
+             AND user_id = $8
              RETURNING *`,
             [
                 name,
                 amount,
                 type,
+                budget,
                 date,
                 note,
                 transactionId,
