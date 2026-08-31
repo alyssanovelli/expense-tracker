@@ -11,6 +11,14 @@ function Login() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 
+     useEffect(() => {
+
+        if (searchParams.get("demo") === "true") {
+            setEmail("demo@expensetracker.com");
+            setPassword("Demo123!")
+        }
+    }, [searchParams]);
+
     const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,13 +52,6 @@ function Login() {
     } catch (error) {
         console.error("Login error:", error);
     }
-    useEffect(() => {
-
-        if (searchParams.get("demo") === "true") {
-            setEmail("demo@expensetracker.com");
-            setPassword("Demo123!")
-        }
-    }, [searchParams]);
 };
     return (
         <div className="login-page">
