@@ -81,7 +81,7 @@
     background-color: #244b82;
 }
 
-.register-error {
+.register-card .error {
     color: #dc2626;
     font-size: 0.9rem;
     margin: 0 0 10px;
