@@ -9,10 +9,13 @@ function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
+
+        setError("");
 
     try {
         const response = await apiFetch("/api/register", {
@@ -30,7 +33,7 @@ function Register() {
         const data = await response.json();
 
         if (!response.ok) {
-            console.error("Registration failed:", data.message);
+            setError(data.message);
             return;
         }
 
@@ -43,6 +46,7 @@ function Register() {
 
     } catch (error) {
         console.error("Could not connect to server:", error);
+        setError("Could not connect to server");
     }
 };
     return (
@@ -75,6 +79,7 @@ function Register() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        {error && <p className="error">{error}</p>}
 
                         <button type="submit">
                             Create Account

@@ -80,3 +80,9 @@
 .register-card button:hover {
     background-color: #244b82;
 }
+
+.register-error {
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin: 0 0 10px;
+}
