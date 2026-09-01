@@ -223,13 +223,19 @@ function Transactions() {
         <div className="transaction-info">
             <strong>{transaction.name}</strong>
 
+            {transaction.note && (
+                <small className="transaction-note">
+                    {transaction.note}
+                </small>
+            )}
+
             <span>
                 {(() => {
                     const [year, month, day] = transaction.date
                         .slice(0, 10)
                         .split("-");
 
-                    return new Date(
+                 return new Date(
                         Number(year),
                         Number(month) - 1,
                         Number(day)
