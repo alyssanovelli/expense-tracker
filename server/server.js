@@ -5,6 +5,7 @@ import pool from "./db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cors from "cors";
+import crypto from "crypto";
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -318,21 +319,43 @@ app.post("/api/forgot-password", async (req, res) => {
         const { email } = req.body;
 
         const result = await pool.query(
-            "SELECT * FROM users WHERE email = $1",
+            "SELECT id FROM users WHERE email = $1",
             [email]
         );
 
+        const message =
+            "If an account with that email exists, a password reset link has been sent.";
+
         if (result.rows.length === 0) {
-            return res.json({
-                message:
-                    "If an account with that email exists, a password reset link has been sent."
-            });
+            return res.json({ message });
         }
 
-        res.json({
-            message:
-                "If an account with that email exists, a password reset link has been sent."
-        });
+        const userId = result.rows[0].id;
+
+        const resetToken = crypto.randomBytes(32).toString("hex");
+
+        const tokenHash = crypto
+            .createHash("sha256")
+            .update(resetToken)
+            .digest("hex");
+
+        const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
+
+        await pool.query(
+            "DELETE FROM password_resets WHERE user_id = $1",
+            [userId]
+        );
+
+        await pool.query(
+            `INSERT INTO password_resets
+             (user_id, token_hash, expires_at)
+             VALUES ($1, $2, $3)`,
+            [userId, tokenHash, expiresAt]
+        );
+
+        console.log("RESET TOKEN:", resetToken);
+
+        res.json({ message });
 
     } catch (error) {
         console.error(error);
