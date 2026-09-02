@@ -313,6 +313,35 @@ app.post("/api/login", async (req, res) => {
         res.status(500).json({ message: "Failed to login" });
     }
 });
+app.post("/api/forgot-password", async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const result = await pool.query(
+            "SELECT * FROM users WHERE email = $1",
+            [email]
+        );
+
+        if (result.rows.length === 0) {
+            return res.json({
+                message:
+                    "If an account with that email exists, a password reset link has been sent."
+            });
+        }
+
+        res.json({
+            message:
+                "If an account with that email exists, a password reset link has been sent."
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Something went wrong. Please try again."
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

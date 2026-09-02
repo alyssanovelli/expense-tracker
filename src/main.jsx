@@ -14,6 +14,7 @@ import Reports from "./pages/Reports.jsx";
 import Settings from "./pages/Settings.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
       },
     ],
   },
