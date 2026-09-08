@@ -6,10 +6,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 import crypto from "crypto";
+import { Resend } from "resend";
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
+const resend = new Resend(process.env.RESEND_API_KEY);
 const app = express();
+
 
 app.use(cors({
     origin: [
@@ -332,14 +335,18 @@ app.post("/api/forgot-password", async (req, res) => {
 
         const userId = result.rows[0].id;
 
-        const resetToken = crypto.randomBytes(32).toString("hex");
+        const resetToken = crypto
+            .randomBytes(32)
+            .toString("hex");
 
         const tokenHash = crypto
             .createHash("sha256")
             .update(resetToken)
             .digest("hex");
 
-        const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
+        const expiresAt = new Date(
+            Date.now() + 30 * 60 * 1000
+        );
 
         await pool.query(
             "DELETE FROM password_resets WHERE user_id = $1",
@@ -353,7 +360,57 @@ app.post("/api/forgot-password", async (req, res) => {
             [userId, tokenHash, expiresAt]
         );
 
-        console.log("RESET TOKEN:", resetToken);
+        const resetUrl =
+            `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+        const { error } = await resend.emails.send({
+            from: "Expense Tracker <onboarding@resend.dev>",
+            to: [email],
+            subject: "Reset your Expense Tracker password",
+            html: `
+                <h2>Reset your password</h2>
+
+                <p>
+                    We received a request to reset your Expense Tracker password.
+                </p>
+
+                <p>
+                    Click the button below to choose a new password.
+                </p>
+
+                <p>
+                    <a
+                        href="${resetUrl}"
+                        style="
+                            display: inline-block;
+                            padding: 12px 20px;
+                            background-color: #3565a8;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 8px;
+                        "
+                    >
+                        Reset Password
+                    </a>
+                </p>
+
+                <p>
+                    This link will expire in 30 minutes.
+                </p>
+
+                <p>
+                    If you did not request a password reset, you can safely ignore this email.
+                </p>
+            `
+        });
+
+        if (error) {
+            console.error("Resend error:", error);
+
+            return res.status(500).json({
+                message: "Something went wrong. Please try again."
+            });
+        }
 
         res.json({ message });
 
@@ -364,6 +421,70 @@ app.post("/api/forgot-password", async (req, res) => {
             message: "Something went wrong. Please try again."
         });
     }
+});
+app.post("/api/reset-password", async (req, res) => {
+    try {
+        const { token, password } = req.body;
+
+        if (!token || !password) {
+            return res.status(400).json({
+                message: "Token and password are required."
+            });
+        }
+
+        const tokenHash = crypto
+            .createHash("sha256")
+            .update(token)
+            .digest("hex");
+        
+        const result = await pool.query(
+            `SELECT *
+             FROM password_resets
+             WHERE token_hash = $1
+             AND expires_at > NOW()`,
+            [tokenHash]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(400).json({
+                message: "Invalid or expired reset link."
+            });
+        }
+        const reset = result.rows[0];
+
+        const passwordHash = await bcrypt.hash(password, 10);
+
+        await pool.query(
+            `UPDATE users
+            SET password_hash = $1
+            WHERE id = $2`,
+            [passwordHash, reset.user_id]
+        );
+
+        await pool.query(
+            `UPDATE password_resets
+             SET password_hash = $1
+             WHERE user_id = $2`,
+            [passwordHash, reset.user_id]
+        );
+
+        await pool.query(
+            `UPDATE password_resets
+             SET used = TRUE
+             WHERE id = $1`,
+            [reset.id]
+        );
+        res.json({
+            message: "Password reset successful. You can now log in with your new password."
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Something went wrong. Please try again."
+        });
+    }   
 });
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

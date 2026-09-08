@@ -15,6 +15,7 @@ import Settings from "./pages/Settings.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: "forgot-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "reset-password/:token",
+        element: <ResetPassword />,
       },
     ],
   },
