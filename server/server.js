@@ -463,13 +463,6 @@ app.post("/api/reset-password", async (req, res) => {
 
         await pool.query(
             `UPDATE password_resets
-             SET password_hash = $1
-             WHERE user_id = $2`,
-            [passwordHash, reset.user_id]
-        );
-
-        await pool.query(
-            `UPDATE password_resets
              SET used = TRUE
              WHERE id = $1`,
             [reset.id]
