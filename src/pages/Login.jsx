@@ -8,10 +8,13 @@ import { apiFetch } from "../utils/apiFetch.js";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 
      useEffect(() => {
+
+        apiFetch("/api/test-db");
 
         if (searchParams.get("demo") === "true") {
             setEmail("demo@expensetracker.com");
@@ -21,6 +24,8 @@ function Login() {
 
     const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
         const response = await apiFetch("/api/login", {
@@ -51,6 +56,8 @@ function Login() {
         navigate("/dashboard");
     } catch (error) {
         console.error("Login error:", error);
+    } finally {
+        setLoading(false);
     }
 };
     return (
@@ -76,8 +83,8 @@ function Login() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
 
-                        <button type="submit">
-                            Log In
+                        <button type="submit" disabled={loading}>
+                            {loading ? "Logging in..." : "Log In"}
                         </button>
 
                 <p className="forgot-password">
