@@ -30,8 +30,9 @@ The live application includes a demo login option so visitors can explore the ap
 
 - Add income and expenses
 - View transaction history
-- Delete transactions
+- Delete and edit transactions
 - Store transaction names, amounts, dates, types, and notes
+- Assign transactions to spending budgets
 - Separate income from expenses
 - Persistent transaction data using PostgreSQL
 
@@ -130,6 +131,7 @@ transactions
 ├── name
 ├── amount
 ├── type
+├── budget
 ├── date
 └── note
 ```
@@ -160,11 +162,14 @@ Authentication
 ```text
 POST /api/register
 POST /api/login
+POST /api/forgot-password
+POST /api/reset-password
 ```
 ## Transactions
 ```text
 GET    /api/transactions
 POST   /api/transactions
+PUT    /api/transactions/:id
 DELETE /api/transactions/:id
 ```
 ## Budgets
@@ -189,6 +194,8 @@ expense-tracker/
 │   │   ├── Register.jsx
 │   │   ├── Dashboard.jsx
 │   │   ├── Transactions.jsx
+|   |   ├── ForgotPassword.jsx
+|   |   ├── ResetPassword.jsx
 │   │   ├── Budgets.jsx
 │   │   ├── Reports.jsx
 │   │   └── Settings.jsx
@@ -258,7 +265,6 @@ Debugging production database issues
 
 ### Potential future improvements include:
 ```text
-Password reset functionality
 More advanced financial reports
 Recurring transactions
 Transaction categories
