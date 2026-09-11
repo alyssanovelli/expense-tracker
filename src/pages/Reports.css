@@ -9,6 +9,7 @@
     flex: 1;
     width: 100%;
     max-width: 1200px;
+    margin-left: 272px;
     margin: 0 auto;
     padding: 40px;
     padding-bottom: 100px;
@@ -142,6 +143,7 @@
     }
 
     .reports-main {
+        margin-left: 0;
         padding: 25px;
     }
 }
