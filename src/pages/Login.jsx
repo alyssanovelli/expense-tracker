@@ -4,11 +4,13 @@ import "./Login.css";
 import HomeNavBar from "../components/HomeNavBar"
 import Footer from "../components/Footer.jsx";
 import { apiFetch } from "../utils/apiFetch.js";
+import { Eye, EyeOff } from "lucide-react";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);    
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 
@@ -77,15 +79,20 @@ function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                         />
                     <label>Password</label>
+                    <div className="password-input-container">
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-
-                        <button type="submit" disabled={loading}>
-                            {loading ? "Logging in..." : "Log In"}
+                        <button
+                            type="button"
+                            className="password-toggle"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                         </button>
+                    </div>
 
                 <p className="forgot-password">
                     <button

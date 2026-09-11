@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeNavBar from "../components/HomeNavBar";
 import Footer from "../components/Footer";
+import { Eye, EyeOff } from "lucide-react";
 import "./Register.css";
 
 function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -74,11 +76,20 @@ function Register() {
                         />
 
                         <label>Password</label>
-                        <input
-                            type="password"
+                        <div className="password-input-container">
+                            <input
+                            type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                        />
+                            />
+                            <button
+                            type="button"
+                            className="password-toggle"
+                            onClick={() => setShowPassword(!showPassword)}
+                            >
+                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                        </div>
                         {error && <p className="error">{error}</p>}
 
                         <button type="submit">
