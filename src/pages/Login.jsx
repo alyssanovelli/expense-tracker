@@ -102,6 +102,9 @@ function Login() {
                         Forgot password?
                     </button>
                 </p>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Signing in..." : "Log In"}
+                </button>
                 </form>
             </div>
             </main>

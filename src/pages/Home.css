@@ -7,48 +7,36 @@
 
 .home-content {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    padding: 80px 40px;
 }
 
-.home-content h1 {
-    margin: 0 0 20px;
+.hero-section {
+    text-align: center;
+    padding: 100px 40px 110px;
+}
 
+.hero-section h1 {
+    margin: 0;
     color: #12345b;
     font-size: 48px;
     font-weight: 700;
     line-height: 1.2;
 }
 
-.home-content p {
+.hero-section p {
     max-width: 650px;
-    margin: 0;
-
+    margin: 20px auto 35px;
     color: #5d718b;
     font-size: 20px;
     line-height: 1.6;
 }
 
-@media (max-width: 768px) {
-    .home-content {
-        padding: 60px 25px;
-    }
-
-    .home-content h1 {
-        font-size: 36px;
-    }
-
-    .home-content p {
-        font-size: 18px;
-    }
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
-.home-content button {
+.hero-buttons button {
     padding: 14px 30px;
     border: none;
     border-radius: 8px;
@@ -60,21 +48,196 @@
     transition: 0.2s ease;
 }
 
-.home-content button:hover {
+.hero-buttons button:hover {
     transform: translateY(-2px);
     opacity: 0.9;
 }
 
-@media (max-width: 480px) {
-    .home-content {
-        padding: 50px 20px;
+.hero-buttons .secondary-button {
+    background: transparent;
+    color: #2f5d9f;
+    border: 1px solid #2f5d9f;
+}
+
+.hero-buttons .secondary-button:hover {
+    background: #e9edf3;
+}
+
+/* Features */
+
+.features-section {
+    padding: 80px 40px;
+    background: white;
+}
+
+.features-section h2,
+.how-it-works h2 {
+    margin: 0 0 45px;
+    text-align: center;
+    color: #12345b;
+    font-size: 30px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    padding: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    background: #f5f3ee;
+}
+
+.feature-card h3 {
+    margin: 0 0 12px;
+    color: #222;
+    font-size: 20px;
+}
+
+.feature-card p {
+    margin: 0;
+    color: #5d718b;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* How It Works */
+
+.how-it-works {
+    padding: 80px 40px;
+    background: #f5f3ee;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.step {
+    text-align: center;
+}
+
+.step span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #2f5d9f;
+    color: white;
+    font-weight: 700;
+}
+
+.step h3 {
+    margin: 0 0 10px;
+    color: #222;
+    font-size: 17px;
+}
+
+.step p {
+    margin: 0;
+    color: #5d718b;
+    line-height: 1.5;
+}
+
+/* Final CTA */
+
+.final-cta {
+    padding: 80px 20px;
+    text-align: center;
+    background: white;
+}
+
+.final-cta h2 {
+    margin: 0 0 15px;
+    color: #12345b;
+    font-size: 30px;
+}
+
+.final-cta p {
+    max-width: 600px;
+    margin: 0 auto 25px;
+    color: #5d718b;
+    line-height: 1.6;
+}
+
+.final-cta button {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    background: #2f5d9f;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.final-cta button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+@media (max-width: 800px) {
+    .hero-section {
+        padding: 70px 25px 80px;
     }
 
-    .home-content h1 {
+    .hero-section h1 {
+        font-size: 40px;
+    }
+
+    .hero-section p {
+        font-size: 18px;
+    }
+
+    .feature-grid,
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features-section,
+    .how-it-works {
+        padding: 60px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 50px 20px 60px;
+    }
+
+    .hero-section h1 {
         font-size: 30px;
     }
 
-    .home-content p {
+    .hero-section p {
         font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .hero-buttons button {
+        width: 100%;
+    }
+
+    .features-section h2,
+    .how-it-works h2,
+    .final-cta h2 {
+        font-size: 25px;
     }
 }

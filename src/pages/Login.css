@@ -66,7 +66,7 @@ body {
     border-color: #2f5d9f;
 }
 
-.login-card button {
+.login-card form > button[type="submit"] {
     margin-top: 20px;
     padding: 13px;
 
@@ -82,12 +82,12 @@ body {
     cursor: pointer;
 }
 
-.login-card button:disabled {
+.login-card form > button[type="submit"]:disabled {
     opacity: 0.7;
     cursor: not-allowed;
 }
 
-.login-card button:hover {
+.login-card form > button[type="submit"]:hover {
     background-color: #244b82;
 }
 
