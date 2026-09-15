@@ -1,12 +1,23 @@
 import Sidebar from "../components/sidebar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Settings.css";
 
 function Settings() {
     const navigate = useNavigate();
 
     const user = JSON.parse(localStorage.getItem("user"));
+
+    const [currency, setCurrency] = useState(
+        localStorage.getItem("currency") || "USD"
+    );
+
+    const handleCurrencyChange = (e) => {
+        const newCurrency = e.target.value;
+        setCurrency(newCurrency);
+        localStorage.setItem("currency", newCurrency);
+    };
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -41,6 +52,24 @@ function Settings() {
                         <div className="settings-value">
                             {user?.email || "Not available"}
                         </div>
+                    </div>
+                </section>
+
+                <section className="settings-card">
+                    <h2>Preferences</h2>
+
+                    <div className="settings-field">
+                        <label htmlFor="currency">Currency</label>
+                        <select
+                            id="currency"
+                            value={currency}
+                            onChange={handleCurrencyChange}
+                        >
+                            <option value="USD">USD - United States Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                        </select>
                     </div>
                 </section>
 

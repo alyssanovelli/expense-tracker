@@ -76,6 +76,24 @@
     line-height: 1.5;
 }
 
+.settings-field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d8dce3;
+    border-radius: 8px;
+    background-color: #f5f3ee;
+    color: #172a4d;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.settings-field select:focus {
+    border-color: #2f5d9f;
+}
+
 .logout-button {
     border: none;
     border-radius: 8px;
